@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import CustomUser, Task
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group
-from .helpers import GROUP_ROLES
+from .helpers import GROUP_ROLES,GROUP_ROLES_REVERSED
 from . import helpers
 
 
@@ -38,6 +38,7 @@ class CreateUser(serializers.ModelSerializer):
                                          username=validated_data['username'],
                                          email=validated_data['email'],
                                          role=role,
+                                         is_superuser= (role==GROUP_ROLES_REVERSED['admin']),
                                          is_staff=True,
                                          password=make_password(validated_data['password']))
 
