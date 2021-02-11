@@ -4,6 +4,7 @@ from .serializers import *
 from .models import *
 from .helpers import GROUP_ROLES, GROUP_ROLES_REVERSED
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import APIException
 
 
 class GetTasks(ListAPIView):

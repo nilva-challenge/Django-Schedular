@@ -4,6 +4,8 @@ from rest_framework_simplejwt import views as jwt_views
 from django.urls import path
 
 urlpatterns = [
-    url(r'^users/$', SignUpUser.as_view()),
+    url(r'^signUp/$', SignUpUser.as_view()),
     url(r'^tasks/$', GetTasks.as_view()),
+    url(r'^login/$', jwt_views.TokenObtainPairView.as_view(),
+        name='login'),
 ]
