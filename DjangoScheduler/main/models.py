@@ -27,6 +27,4 @@ class Task(models.Model):
 
         super().save(*args, **kwargs)
 
-    def update(self, *args, **kwargs):
-        print('updating task with args: ', args, kwargs)
-        # super().update(*args, **kwargs)
+  

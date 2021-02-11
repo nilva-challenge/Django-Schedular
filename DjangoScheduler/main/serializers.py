@@ -3,9 +3,11 @@ from .models import CustomUser, Task
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group
 from .helpers import GROUP_ROLES
+from . import helpers
 
 
 class CreateUser(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
@@ -14,7 +16,13 @@ class CreateUser(serializers.ModelSerializer):
                   'username',
                   'password',
                   'email',
-                  'role')
+                  'role',
+                  'token')
+
+        read_only_fields = ('token',)
+
+    def get_token(self, CustomUser):
+        return helpers.get_token(CustomUser)
 
     def create(self, validated_data):
 
