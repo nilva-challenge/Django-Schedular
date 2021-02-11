@@ -1,0 +1,1 @@
+GROUP_ROLES = {'A':'admin','N':'normal'}

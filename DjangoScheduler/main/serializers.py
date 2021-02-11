@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import CustomUser, Task
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import Group
+from .helpers import GROUP_ROLES
 
 
 class CreateUser(serializers.ModelSerializer):
@@ -17,7 +19,7 @@ class CreateUser(serializers.ModelSerializer):
     def create(self, validated_data):
 
         role = None
-        
+
         if 'role' in validated_data:
             role = validated_data['role']
         else:
@@ -30,6 +32,11 @@ class CreateUser(serializers.ModelSerializer):
                                          role=role,
                                          is_staff=True,
                                          password=make_password(validated_data['password']))
+
+        try:
+            user.groups.add(Group.objects.get(name=GROUP_ROLES[role]))
+        except Exception as e:
+            print(e)
 
         user.save()
         return user

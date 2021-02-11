@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 
 
 class CustomUser(AbstractUser):
-    roleChoices = (("A", 'admin'), ('N', 'normal'))
+    roleChoices = (("A", "admin"), ('N', "normal"))
     first_name = models.CharField(max_length=10)
     last_name = models.CharField(max_length=10)
     role = models.CharField(max_length=2, choices=roleChoices, default='N')
