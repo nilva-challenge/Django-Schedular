@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'scheduler'
 ]
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
@@ -119,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -155,6 +156,21 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=500),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=10),
 }
+
+CELERY_BROKER_URL = "amqp://localhost"
+CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'rpc://'
+CELERY_RESULT_PRESISTANT = False
+EMAIL_HOST = 'smtp.fastmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'bmhztest@fastmail.com'
+EMAIL_HOST_PASSWORD = '2a88gakt49elc5r7'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
 
 STATIC_URL = '/static/'
 APPEND_SLASH = False

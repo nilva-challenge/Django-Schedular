@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import Group
+from DjangoScheduler.controller import Controller
 
 
 class CustomUser(AbstractUser):
@@ -18,13 +19,19 @@ class Task(models.Model):
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     timeToSend = models.DateTimeField()
 
+    def __str__(self):
+        return '{}-{}-{}'.format(self.title,self.owner.first_name,self.timeToSend)
+
+
     def save(self, *args, **kwargs):
-        print('creating/saving object with args ', args, kwargs)
+
+        controller = Controller()
+
+        print(self.timeToSend)
+
         if self.pk:
-            print('record exists, updtating...new name is: ', self.title)
+            controller.updateTask(self)
+            super().save(*args, **kwargs)
         else:
-            print('newly saving record...')
-
-        super().save(*args, **kwargs)
-
-  
+            super().save(*args, **kwargs)
+            controller.scheduleTask(self)
