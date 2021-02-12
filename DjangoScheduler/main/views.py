@@ -14,7 +14,6 @@ class GetTasks(ListAPIView):
     serializer_class = GetTasks
 
     def get_queryset(self):
-        print(self.request.user.role)
         user = self.request.user
         if user.role == GROUP_ROLES_REVERSED['admin']:
             return Task.objects.all()
