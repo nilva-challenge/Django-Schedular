@@ -157,6 +157,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=10),
 }
 
+
+# celery configuration
 CELERY_BROKER_URL = "amqp://localhost"
 CELERY_TIMEZONE = "Asia/Tehran"
 CELERY_TASK_TRACK_STARTED = True
@@ -164,10 +166,12 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'rpc://'
 CELERY_RESULT_PRESISTANT = False
+
+# smtp configuration
 EMAIL_HOST = 'smtp.fastmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'bmhztest@fastmail.com'
-EMAIL_HOST_PASSWORD = '2a88gakt49elc5r7'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
