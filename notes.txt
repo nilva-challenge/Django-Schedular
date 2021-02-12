@@ -1,0 +1,18 @@
+app for scheduling tasks for users.
+
+- tasks ---> title, description, owner, timeToSend
+
+- admin users(abstract user) ----> CURD user tasks --- when admins changes tasks schedules tasks should be updated or created
+
+- normal users(abstract user) --->{email, username, password, firstName, lastName, Permissions} see filter and add to their own tasks
+
+
+- api authentication (login/signup)
+
+- api for getting all tasks(according to user permission)/JWT
+
+- implement unit-testing for authentication api
+
+--------------------------------------------------
+abstract user models with groups and permissiosn assigned to groups
+ * make script for fistTime run to craeting groups with permissions 
