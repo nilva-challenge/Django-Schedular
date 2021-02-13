@@ -1,7 +1,7 @@
-from celery import Celery
-from .views import send_emails
+from celery import shared_task
+from ._send import send_emails
 
-app = Celery()
-@app.task
-def trigger_emails():
+
+@shared_task
+def send():
     send_emails()

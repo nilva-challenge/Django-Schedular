@@ -1,0 +1,85 @@
+
+{% extends 'panel/master.html' %}
+{% load static %}
+
+
+{% block mainblock %}
+
+   <!-- Datatables Header -->
+   <div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>User Manager List<br><small>you can add, edit and delete your data!</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Manager</li>
+    <li><a href="/panel/manager/list/">List</a></li>
+</ul>
+<!-- END Datatables Header -->
+
+
+
+  <!-- Datatables Content -->
+  <div class="block full">
+    <div class="block-title">
+        <h2><strong>Manager</strong> List</h2>
+    </div>
+
+    <div class="table-responsive">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+
+                    <th>Name</th>
+                    <th>lastname</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Permission</th>
+
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for cc in manager %}
+                <tr>
+                    <td class="text-center">{{cc.pk}}</td>
+                    <td>{{cc.first_name}}</td>
+                    <td>{{cc.last_name}} </td>
+                    <td>{{cc.user.email}}</td>
+                    <td>{{cc.user.username}}</td>
+                    <td>{{cc.permissions}}</td>
+
+                    <td class="text-center">
+                        <div class="btn-group">
+
+
+                            <a href="{%url 'user_del' cc.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Delete</i></a>
+
+                        </div>
+                    </td>
+                </tr>
+
+
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- END Datatables Content -->
+
+
+{% endblock %}
+
+
+
+
+{% block footerblock %}
+
+   <!-- Load and execute javascript code used only in this page -->
+   <script src="{%static 'back/js/pages/tablesDatatables.js' %}"></script>
+   <script>$(function(){ TablesDatatables.init(); });</script>
+        {% endblock %}
