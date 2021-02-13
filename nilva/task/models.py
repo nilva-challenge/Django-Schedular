@@ -9,3 +9,6 @@ class Task(models.Model):
     description=models.TextField()
     owner=models.OneToOneField(User,on_delete=models.CASCADE)
     time_to_send_field=models.DateTimeField()
+
+    def __str__(self) -> str:
+        return self.tile
