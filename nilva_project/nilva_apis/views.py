@@ -19,7 +19,6 @@ class AllTasksView(APIView):
     def get(self,request):
         tasks = todo_service.get_all_todos()
         serializer = TodoSerializer(tasks,many=True)
-        print(request.user.is_superuser)
         return Response(serializer.data,status.HTTP_200_OK)
 
 class UserTasksView(APIView):
