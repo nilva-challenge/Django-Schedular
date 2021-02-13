@@ -47,3 +47,9 @@ So What does matter to us?
 7. Enjoy
 
 **Finally** don't be afraid to ask anything from us.
+_____________________________________________________________________________________________________________________
+
+My descriptions:
+I configured the django admin panel and developed the authentication api with DRF and in this days i learned some things that i didnt know them so i developed this app but unfortunately i couldn't complete this challenge because i did not know any things about celery and i watch some videos in youtube about celery but i couldn't do this task completely .
+
+![Alt text](https://github.com/AliEjlalzadeh/Django-Schedular/blob/main/TasksImage.PNG)
