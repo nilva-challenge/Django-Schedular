@@ -1,0 +1,111 @@
+
+{% extends 'panel/master.html' %}
+{% load static%}
+
+{% block headblock %}
+
+
+{% endblock %}
+
+{% block mainblock %}
+
+<!-- Datatables Header -->
+<div class="content-header">
+<div class="header-section">
+    <h1>
+        <i class="fa fa-table"></i>Add Tasks<br><small>you can add, edit and delete your data!</small>
+    </h1>
+</div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+<li>Tasks</li>
+<li><a href="/panel/tasks/add/">Add</a></li>
+</ul>
+<!-- END Datatables Header -->
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+
+                <h2><strong>Add</strong> tasks</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form action="{%url 'tasks_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+                {% csrf_token %}
+                <div class="form-group">
+                        <div class="col-md-6">
+                            <input type="text" id="title" name="title" class="form-control" placeholder="Task Title">
+                        </div>
+                        {% if perms.main.master_user %}
+                        <div class="col-md-6">
+
+                                <select id="owner" name="owner" class="select-chosen" data-placeholder="Choose a User..." style="width: 250px;">
+
+                                        {% for i in user %}
+                                        <option value="{{i.pk}}">{{i.username}}</option>
+                                        {% endfor %}
+
+
+                                    </select>
+
+                        </div>
+                        {%endif%}
+                    </div>
+
+                    <div class="form-group">
+
+                                <div class="form-group">
+                            <div class="col-md-6">
+                                <textarea type="text" id="descriptions" name="descriptions" rows="3" class="form-control" placeholder="Task Description"></textarea>
+                            </div>
+
+
+
+                            <div class="col-md-2">
+                                <input type="time" id="time_to_send" name="time_to_send" class="form-control" placeholder="Time To Send">
+                            </div>
+
+                        </div>
+
+
+
+                            <div class="form-group">
+                                    <div class="col-md-12">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                        </div>
+
+                                </div>
+
+
+
+
+
+
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+{% block footerblock %}
+
+   <!-- Load and execute javascript code used only in this page -->
+   <script src="{%static 'back/js/pages/tablesDatatables.js' %}"></script>
+   <script>$(function(){ TablesDatatables.init(); });</script>
+        {% endblock %}

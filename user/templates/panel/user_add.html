@@ -1,0 +1,125 @@
+
+{% extends 'panel/master.html' %}
+{% load static%}
+
+{% block headblock %}
+
+
+{% endblock %}
+
+{% block mainblock %}
+
+<!-- Datatables Header -->
+<div class="content-header">
+<div class="header-section">
+    <h1>
+        <i class="fa fa-table"></i>Add User<br><small>you can add, edit and delete your data!</small>
+    </h1>
+</div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+<li>User</li>
+<li><a href="/panel/user/add/">Add</a></li>
+</ul>
+<!-- END Datatables Header -->
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+
+                <h2><strong>Add</strong> User</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form action="{%url 'user_add' %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+                {% csrf_token %}
+                <div class="form-group">
+                        <div class="col-md-6">
+                            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name" required>
+                        </div>
+                    <div class="col-md-6">
+
+                            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name" required>
+
+                        </div>
+
+                    </div>
+
+
+                                <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" id="utext" name="utext"  class="form-control" placeholder="Username" required>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                            </div>
+
+                        </div>
+
+                            <div class ="form-group">
+
+                            <div class ="col-md-6">
+
+                                <input type = "password" id="pass1" name="pass1" class="form-control" placeholder="Password" required>
+
+                            </div>
+                                <div class= "col-md-6">
+
+                            <input type='password' id='pass2' name='pass2' class="form-control" placeholder="Confirm Password" required>
+                            </div>
+
+                    </div>
+
+                            <div class="form-group">
+
+
+                            <div class = "col-md-6">
+
+                            <select id = "permissions" name = "permissions" class ="select-chosen" data-placeholder="Choose a Permission..." style="width: 250px;" >
+
+                                <option value = "Normal" > Normal </option>
+                                <option value = "Admin" > Admin </option>
+
+                            </select>
+                        </div>
+                                    <div class="col-md-6">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                        </div>
+
+                                </div>
+
+
+
+
+
+
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+{% block footerblock %}
+
+   <!-- Load and execute javascript code used only in this page -->
+   <script src="{%static 'back/js/pages/tablesDatatables.js' %}"></script>
+   <script>$(function(){ TablesDatatables.init(); });</script>
+        {% endblock %}
