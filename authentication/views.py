@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -19,5 +17,5 @@ class RegisterView(generics.CreateAPIView):
 
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        member = serializer.save()
-        return Response(member, status=status.HTTP_201_CREATED)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
