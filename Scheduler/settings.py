@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Scheduler.wsgi.application'
-
+AUTH_USER_MODEL = 'users.Member'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
