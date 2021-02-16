@@ -24,6 +24,13 @@ class MemberAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     list_per_page = 20
 
+    # Staffs which are not superusers can't view and edit other staffs
+    def get_queryset(self, request):
+        qs = super(MemberAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(is_staff=False)
+
     def get_form(self, request, obj=None, **kwargs):
         defaults = {}
         if obj is None:
