@@ -15,7 +15,11 @@ class RegisterView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        create_staff = serializer.validated_data['is_staff']
+        create_staff = False
+        if 'is_staff' in serializer.validated_data:
+            create_staff = serializer.validated_data['is_staff']
+        else:
+            serializer.validated_data['is_staff'] = False
         is_superuser = request.user.is_superuser
 
         if create_staff and not is_superuser:
