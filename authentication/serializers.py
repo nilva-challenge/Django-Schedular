@@ -23,8 +23,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         member.set_permissions()
         return member
 
-
-class MemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Member
-        fields = '__all__'
