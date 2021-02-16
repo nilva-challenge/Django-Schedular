@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.urls import reverse
+from django.utils.html import format_html
+from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
 from .models import Task
@@ -9,11 +12,21 @@ from .models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'owner', 'time_to_send')
+    list_display = ('title', 'description', 'view_owner_link', 'time_to_send')
     ordering = ('time_to_send', 'title')
     search_fields = ('title', 'description', 'owner')
     list_filter = ('owner', 'time_to_send')
     list_per_page = 20
+
+    def view_owner_link(self, obj):
+        url = (
+            reverse('admin:users_member_change', args=[obj.owner_id])
+            + '?'
+            + urlencode({'tasks__id': f'{obj.id}'})
+        )
+        return format_html('<a href="{}">{}</a>', url, obj.owner)
+
+    view_owner_link.short_description = 'Owner'
 
 
 # django admin interface authentication for non-staff members
