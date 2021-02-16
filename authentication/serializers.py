@@ -20,6 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                                             last_name=validated_data['last_name'],
                                             email=validated_data['email'],
                                             is_staff=validated_data['is_staff'])
+        member.set_permissions()
         return member
 
 
