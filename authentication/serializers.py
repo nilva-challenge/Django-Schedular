@@ -22,4 +22,3 @@ class RegisterSerializer(serializers.ModelSerializer):
                                             is_staff=validated_data['is_staff'])
         member.set_permissions()
         return member
-
