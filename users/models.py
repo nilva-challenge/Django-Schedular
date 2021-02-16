@@ -12,7 +12,13 @@ class Member(AbstractUser):
 
     def set_permissions(self):
         if self.is_staff:
-            permission_handles = ['Can add user', 'Can change user', 'Can delete user', 'Can view user']
+            permission_handles = ['Can add user', 'Can change user', 'Can delete user', 'Can view user'
+                                  'Can add task', 'Can change task', 'Can view task']
+            for p in permission_handles:
+                permission = Permission.objects.get(name=p)
+                self.user_permissions.add(permission)
+        else:
+            permission_handles = ['Can add task', 'Can view task']
             for p in permission_handles:
                 permission = Permission.objects.get(name=p)
                 self.user_permissions.add(permission)
