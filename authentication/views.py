@@ -12,10 +12,16 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = auth_serializers.RegisterSerializer
 
-    def post(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        create_staff = serializer.validated_data['is_staff']
+        is_superuser = request.user.is_superuser
 
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if create_staff and not is_superuser:
+            return Response('Only superusers can create new staff members',
+                            status=status.HTTP_401_UNAUTHORIZED)
+
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
