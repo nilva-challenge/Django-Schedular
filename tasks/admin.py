@@ -7,6 +7,7 @@ from django.utils.html import format_html
 from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
+from users.models import Member
 from .models import Task
 from .tasks import send_scheduled_mail
 
@@ -34,6 +35,10 @@ class TaskAdmin(admin.ModelAdmin):
         email = obj.owner.email
         send_scheduled_mail.apply_async(args=[email], eta=time_to_send)
         super().save_model(request, obj, form, change)
+
+    def render_change_form(self, request, context, *args, **kwargs):
+        context['adminform'].form.fields['owner'].queryset = Member.objects.filter(is_staff=False)
+        return super(TaskAdmin, self).render_change_form(request, context, *args, **kwargs)
 
 
 # django admin interface authentication for non-staff members
