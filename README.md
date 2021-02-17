@@ -41,7 +41,13 @@ I needed to create 2 different instances of AdminSite since normal users
 can't access the admin interface because they're not staff members.
 So there are 2 URLs, one for admins(/admin) and one for normal users
 (/user) which are both customized to meet the specifications pointed out
-in the document.
+in the document. To be able to add admins and permissions, you have to
+be a superuser. You can create a superuser with this command:
+```
+python manage.py createsuperuser --email your_email --username your_username 
+```
+Then you're asked to enter a password and your superuser account will be
+created successfully.
 
 ## Authentication
 Authentication is implemented by django simple_jwt module and both of
