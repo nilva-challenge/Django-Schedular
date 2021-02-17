@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "b74d1e88-46ee-4e49-9555-57c5fb9f9283",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registeration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"test_username\",\r\n    \"password\" : \"test_password\",\r\n    \"first_name\" : \"test_first_name\",\r\n    \"last_name\" : \"test_last_name\",\r\n    \"email\" : \"test@email.com\",\r\n    \"is_staff\" : false\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1.0/auth/register/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1.0",
+						"auth",
+						"register",
+						""
+					]
+				},
+				"description": "Sign up to the app(for anonymous users. You can't set is_staff to true in this case).\nCreate users(is_staff=false) and admins(is_staff=true)(For superusers only)."
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"test_username\",\r\n    \"password\" : \"test_password\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1.0/auth/login/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1.0",
+						"auth",
+						"login",
+						""
+					]
+				},
+				"description": "Login with your credentials(open to everyone)."
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh\": \"refresh\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1.0/auth/token/refresh/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1.0",
+						"auth",
+						"token",
+						"refresh",
+						""
+					]
+				},
+				"description": "Request for a new access token if your old one is expired."
+			},
+			"response": []
+		},
+		{
+			"name": "Get a List of Tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Auth",
+						"value": "Bearer Token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/api/v1.0/task/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1.0",
+						"task",
+						""
+					]
+				},
+				"description": "Get a list of all the tasks(if you are an admin) or just your own tasks(if you are a normal user)."
+			},
+			"response": []
+		}
+	]
+}
