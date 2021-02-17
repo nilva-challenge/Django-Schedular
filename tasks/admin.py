@@ -8,6 +8,7 @@ from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
 from .models import Task
+from .tasks import send_scheduled_mail
 
 
 @admin.register(Task)
@@ -27,6 +28,12 @@ class TaskAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">{}</a>', url, obj.owner)
 
     view_owner_link.short_description = 'Owner'
+
+    def save_model(self, request, obj, form, change):
+        time_to_send = obj.time_to_send
+        email = obj.owner.email
+        send_scheduled_mail.apply_async(args=[email], eta=time_to_send)
+        super().save_model(request, obj, form, change)
 
 
 # django admin interface authentication for non-staff members
@@ -72,6 +79,12 @@ class TaskUser(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(TaskUser, self).get_queryset(request)
         return qs.filter(owner=request.user)
+
+    def save_model(self, request, obj, form, change):
+        time_to_send = obj.time_to_send
+        email = obj.owner.email
+        send_scheduled_mail.apply_async(args=[email], eta=time_to_send)
+        super().save_model(request, obj, form, change)
 
 
 user_site.register(Task, TaskUser)
