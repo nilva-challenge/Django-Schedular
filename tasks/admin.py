@@ -81,10 +81,14 @@ class TaskUser(admin.ModelAdmin):
         return qs.filter(owner=request.user)
 
     def save_model(self, request, obj, form, change):
+        obj.owner = request.user
         time_to_send = obj.time_to_send
         email = obj.owner.email
         send_scheduled_mail.apply_async(args=[email], eta=time_to_send)
         super().save_model(request, obj, form, change)
+
+    def get_readonly_fields(self, request, obj=None):
+        return ['owner', ]
 
 
 user_site.register(Task, TaskUser)
