@@ -1,49 +1,92 @@
-# In name of Allah
-
-## Introduction
-We want a simple app to schedule tasks for users. It should be possible to use django admin as interface for this application.
-
-There are two kind of users:
-- normal users:
-- admin users
-
-normal users can only see, filter & add to their own tasks. These tasks will have a title, description, owner and time to send field. When user creates new task, it should be scheduled to send an email to its owner at the specified time (use celery for this purpose).
-
-admin users have the permission to manage users, add to them and delete them. Also they can manage all tasks of users, add task for them and edit their tasks. When created or edited, scheduled tasks should be added or edited.
-
-**note** that each user must have below fields:
-- email
+# In the name of GOD
+##Description
+This projects is a simple task scheduling project in which there are two types
+of users namely, 'normal' and 'admin'. Users have these fields:
 - username
 - password
-- first name
-- last name
-- permissions (admin & normal)
+- first_name
+- last_name
+- email
+- and a set of permissions
 
-You should extend AbstractUser for implementing user model.
+Normal users can add and view their own tasks which have:
+- title
+- description
+- owner
+- time_to_send
 
-In addition to these (all should be implemented in django admin) write an API for authentication (login & signup) and an API for getting list of tasks (according to permission of user).
+while admins not only can edit and view and add to normal users' tasks, but
+they also can manage the normal users themselves.
 
-### Note
-Use django rest framework and JWT for authentication.
+There are sign up and login APIs through which users can sign up and access
+their account. Superusers can also use the sign up API to add new users or 
+admins.
 
-Also do not forget to write unit test for authentication API.
+I've decided that admins can't add other admins and change permissions
+groups, but it's easily modifiable. The permissions which are set for users
+upon creation are also easily modifiable through set_permission method
+in User model.
 
-## Expectations
-
-So What does matter to us?
-- a clean structure of codebase & components
-- clean code practices
-- well written unit tests
-- finally, ability to learn
+When creating tasks, the time_to_send field is used to schedule an email
+on that time to the user.
 
 ## Tasks
+you can see the list of tasks that I specified for myself in the pictures below.
+![picture](static/tasks1.png)
+![picture](static/tasks2.png)
 
-1. Fork this repository
-2. Break and specify your tasks in project management tool (append the image of your tasks to readme file of your project)
-3. Learn & Develop
-4. Push your code to your repository
-5. Explain the roadmap of your development in readme of repository (also append the image of your specified tasks on part 2 to file)
-6. Send us a pull request, we will review and get back to you
-7. Enjoy
+## Django Admin
+For the django admin interface to be used by both normal and admin users
+I needed to create 2 different instances of AdminSite since normal users
+can't access the admin interface because they're not staff members.
+So there are 2 URLs, one for admins(/admin) and one for normal users
+(/user) which are both customized to meet the specifications pointed out
+in the document. To be able to add admins and permissions, you have to
+be a superuser. You can create a superuser with this command:
+```
+python manage.py createsuperuser --email your_email --username your_username 
+```
+Then you're asked to enter a password and your superuser account will be
+created successfully.
 
-**Finally** don't be afraid to ask anything from us.
+## Authentication
+Authentication is implemented by django simple_jwt module and both of
+login(token obtain) and refresh token are tested using django TestCase.
+To run the tests you can use the following command in the root of the project.
+```
+python manage.py test
+```
+
+## Run
+To run the project you have to open your terminal in the root of the
+project next to manage.py.
+
+Then install the requirements:
+```
+pip install -r requirements.txt
+```
+After that migrate the database migrations:
+```
+python manage.py migrate
+```
+Then run the server on your localhost with the command below:
+```
+python manage.py runserver
+```
+and you can access the APIs or the interfaces with their URLs.
+APIs are documented in the postman collection, you just need to 
+add authorization token in the header where needed. Interfaces are
+also easy to follow and self-explanatory.
+For email scheduling you need to install and run redis.After that
+you have to enter values for celery and email backend configs in 
+settings.py of the project and also run the celery worker with the
+command below:
+```
+celery -A Scheduler worker -l info
+```
+
+## Conclusion
+I hardly tried to follow the specifications of the challenge document
+and tried to create a clean and easily modifiable project. Don't
+to contact me and ask for a presentation on how I managed to developed
+the project and ask any questions that might have occurred to you.
