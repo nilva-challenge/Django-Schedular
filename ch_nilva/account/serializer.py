@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import User
 
 
-class RegistrationSerializer(serializers.ModelSerializer):
+class UserRegistrationSerializer(serializers.ModelSerializer):
     re_password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     is_staff = serializers.BooleanField(default=False)
 
@@ -11,32 +11,27 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = ['id', 'email', 'username', 'first_name', 'last_name', 'password', 're_password', 'is_staff']
         extra_kwargs = {
             'password': {'write_only': True},
+            'first_name': {'required': True},
+            'last_name': {'required': True},
+            'email': {'required': True}
         }
 
-    def save(self, **kwargs):
+    def validate(self, attrs):
+        if attrs['password'] != attrs['re_password']:
+            raise serializers.ValidationError({'password': 'password are not match'})
+        return attrs
+
+    def create(self, validated_data):
         is_staff = False
-        if 'is_staff' in self.validated_data:
-            is_staff = self.validated_data['is_staff']
+        if 'is_staff' in validated_data:
+            is_staff = validated_data['is_staff']
         user = User(
-            email=self.validated_data['email'],
-            username=self.validated_data['username'],
-            first_name=self.validated_data['first_name'],
-            last_name=self.validated_data['last_name'],
+            email=validated_data['email'],
+            username=validated_data['username'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
             is_staff=is_staff
         )
-        pas1 = self.validated_data['password']
-        pas2 = self.validated_data['re_password']
-
-        """ confirm password """
-        if pas1 != pas2:
-            raise serializers.ValidationError({'password': 'password are not match'})
-
-        user.set_password(pas1)
+        user.set_password(validated_data['password'])
         user.save()
         return user
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'email', 'username', 'first_name', 'last_name']
