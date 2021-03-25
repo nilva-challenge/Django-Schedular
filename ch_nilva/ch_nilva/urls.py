@@ -32,5 +32,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('api/admin/', admin.site.urls),
     path('api/auth/', include('account.urls')),
+    path('api/tasks/', include('schedule.urls')),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
