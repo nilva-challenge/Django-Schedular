@@ -3,6 +3,8 @@ from .serializer import TaskSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from django.http.response import HttpResponse
+from django.core.mail import send_mail
+from . import tasks
 
 
 class TaskList(ListAPIView):
@@ -16,9 +18,6 @@ class TaskList(ListAPIView):
         return query
 
 
-from .tasks import sleepy
-
-
 def index(request):
-    sleepy.delay(10)
-    return HttpResponse('Nothing')
+    msg = tasks.send_task_mail.delay('sadrakhamoshi7@gmail.com')
+    return HttpResponse("msg")
