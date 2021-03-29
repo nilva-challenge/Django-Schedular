@@ -20,6 +20,9 @@ class CustomAccountAdmin(admin.ModelAdmin):
             return False
         return True
 
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_admin or request.user.is_superuser
+
     def has_view_permission(self, request, obj=None):
         return True
 

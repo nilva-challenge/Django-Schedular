@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.http.response import HttpResponse
 from django.core.mail import send_mail
 from . import tasks
+from django.shortcuts import get_object_or_404
 
 
 class TaskList(ListAPIView):
@@ -20,4 +21,4 @@ class TaskList(ListAPIView):
 
 def index(request):
     msg = tasks.send_task_mail.delay('sadrakhamoshi7@gmail.com')
-    return HttpResponse("msg")
+    return HttpResponse(msg)
