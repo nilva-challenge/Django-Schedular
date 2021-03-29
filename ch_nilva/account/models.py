@@ -3,8 +3,8 @@ from django.db import models
 
 
 class User(AbstractUser):
-    ADMIN = 'admin'
-    NORMAL = 'normal'
+    is_staff = models.BooleanField(default=True, verbose_name='staff status')
+    is_admin = models.BooleanField(default=False, verbose_name='admin status')
 
     def __str__(self):
         return self.username

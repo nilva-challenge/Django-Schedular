@@ -13,7 +13,7 @@ class TaskList(ListAPIView):
 
     def get_queryset(self):
         query = Task.objects.all()
-        if not self.request.is_staff:
+        if not self.request.is_admin:
             return query.filter(owner=self.request.user)
         return query
 
