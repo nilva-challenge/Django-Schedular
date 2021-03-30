@@ -1,11 +1,11 @@
 # In name of Allah
 
 ## Trello Tasks
-![alt text](https://github.com/sadrakhamoshi/Django-Schedular/blob/feature_custom_task_admin/ch_nilva/pic/SharedScreenshot.jpg)
+![alt text](https://github.com/sadrakhamoshi/Django-Schedular/blob/develope/ch_nilva/pic/SharedScreenshot.jpg)
 
-![alt text](https://github.com/sadrakhamoshi/Django-Schedular/blob/feature_custom_task_admin/ch_nilva/pic/SharedScreenshot2.jpg)
+![alt text](https://github.com/sadrakhamoshi/Django-Schedular/blob/develope/ch_nilva/pic/SharedScreenshot2.jpg)
 
-![alt text](https://github.com/sadrakhamoshi/Django-Schedular/blob/feature_custom_task_admin/ch_nilva/pic/SharedScreenshot3.jpg)
+![alt text](https://github.com/sadrakhamoshi/Django-Schedular/blob/develope/ch_nilva/pic/SharedScreenshot3.jpg)
 
 ## Introduction
 We want a simple app to schedule tasks for users. It should be possible to use django admin as interface for this application.
