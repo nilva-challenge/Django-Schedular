@@ -5,6 +5,7 @@ from celery.app.control import Control
 from ch_nilva.celery import app
 from django.urls import reverse
 from django.utils.html import format_html
+from account.models import User
 
 
 @admin.register(Task)
@@ -12,7 +13,7 @@ class CustomTaskAdmin(admin.ModelAdmin):
     list_display = ('title', 'time_to_send', 'get_task_link',)
     list_filter = ('time_to_send', 'owner',)
     search_fields = ('owner', 'title',)
-    exclude = ('celery_task_id',)
+    readonly_fields = ('celery_task_id',)
 
     def get_task_link(self, obj):
         username = obj.owner.username
@@ -51,20 +52,20 @@ class CustomTaskAdmin(admin.ModelAdmin):
             return super(CustomTaskAdmin, self).has_change_permission(request, obj)
         return request.user.is_admin or request.user.is_superuser
 
-    def get_form(self, request, obj=None, change=False, **kwargs):
-        form = super(CustomTaskAdmin, self).get_form(request, obj, change, **kwargs)
-        """ add page for normal users """
-        if not change:
-            user = request.user
-            # form.base_fields['celery_task_id'].disabled = True
-            if (not user.is_admin) and (not user.is_superuser):
-                form.base_fields['owner'].initial = user
-                form.base_fields['owner'].disabled = True
-                return form
+    # set policy of making task for other users : normal -> normal
+    # admin -> admin, normal |  superuser -> superuser, admin, normal
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        query = super(CustomTaskAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        if db_field.name == 'owner':
+            if request.user.is_superuser:
+                return query
+            if request.user.is_admin:
+                kwargs['queryset'] = User.objects.filter(is_superuser=False)
             else:
-                form.base_fields['owner'].diabled = False
-                return form
-        return form
+                kwargs['queryset'] = User.objects.filter(id=request.user.id)
+            return super(CustomTaskAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        else:
+            return query
 
     def delete_model(self, request, obj):
         """ cancel the task from broker """
