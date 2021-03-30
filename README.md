@@ -24,7 +24,7 @@ admin users have the permission to manage users, add to them and delete them. Al
 - normal
 each type of this users can log in into the admin interface of Django with different policies.
 
-account & authentication
+Account & Authentication
 ------------------------
 superusers have all permissions. they can change, create and etc the other users.
 admin can create normal user and admin user and change some parts of their information ( e.g admin can not change the user's role into the superuser)
@@ -60,9 +60,9 @@ broker, which i used redis.\
 
 celery doc : (https://docs.celeryproject.org/en/stable/index.html)
 
-Tasks Admin
+Customize Tasks Admin
 --------------
-finally i created a customized admin interface for users base on their permissions
+Finally I customized the admin panel for managing the tasks and again I used admin.ModelAdmin and override some of its base methods. 
 
 -------------------------------------------------
 
