@@ -1,6 +1,4 @@
-from celery import shared_task, current_task
-from time import sleep
-from celery.contrib import rdb
+from celery import shared_task
 from django.core.mail import send_mail
 
 MESSAGE = 'This is from you task schedule Nilva. You scheduled this time for  your task. Thanks for using Nilva'

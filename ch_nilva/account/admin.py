@@ -25,6 +25,8 @@ class CustomAccountAdmin(admin.ModelAdmin):
     def get_fullname(self, obj):
         return obj.first_name + ' ' + obj.last_name
 
+    get_fullname.short_description = 'Full Name'
+
     def has_add_permission(self, request):
         return request.user.is_superuser or request.user.is_admin
 

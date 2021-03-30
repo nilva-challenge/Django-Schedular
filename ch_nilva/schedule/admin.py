@@ -14,6 +14,7 @@ class CustomTaskAdmin(admin.ModelAdmin):
     list_filter = ('time_to_send', 'owner',)
     search_fields = ('owner', 'title',)
     readonly_fields = ('celery_task_id',)
+    actions = None
 
     def get_task_link(self, obj):
         username = obj.owner.username
@@ -78,10 +79,9 @@ class CustomTaskAdmin(admin.ModelAdmin):
         # changed data
         if change:
             if 'time_to_send' in form.changed_data:
-                task_obj = Task.objects.get(id=obj.id)
                 control = Control(app)
-                control.terminate(task_id=task_obj.celery_task_id)
-                id = send_task_mail.apply_async(args=[task_obj.owner.email], eta=obj.time_to_send)
+                control.terminate(task_id=obj.celery_task_id)
+                id = send_task_mail.apply_async(args=[obj.owner.email], eta=obj.time_to_send)
                 obj.celery_task_id = id
             super(CustomTaskAdmin, self).save_model(request, obj, form, change)
 
