@@ -68,6 +68,16 @@ finally i created a customized admin interface for users base on their permissio
 
 Run
 ==================
+
+
+### install postgres
+
+Download Link: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+- Create a Database (Check ch_nilva/ch_nilva/settings.py for database name)
+- create a Login/Group Roles (Check ch_nilva/ch_nilva/settings.py for user and password)
+
+--------------------------------
+
 1.clone the porject : 
 
 ````
@@ -75,7 +85,7 @@ git clone https://github.com/sadrakhamoshi/Django-Schedular.git
 ````
 ----------------------------
 
-2.Install pip and python3.7 and virtualenv if you don't have them.\
+2.Install pip and python3.7 and virtualenv if you don't have them\
 pip install link : https://pip.pypa.io/en/stable/installing/
 
 ````
@@ -88,20 +98,28 @@ venv link : https://docs.python.org/3/library/venv.html
 
 -----------------------------
 
-4.install postgres\
-
-Download Link: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
-- Create a Database (Check ch_nilva/ch_nilva/settings.py for database name)
-- create a Login/Group Roles (Check ch_nilva/ch_nilva/settings.py for user and password)
-
---------------------------------
-5.Install requirements\
+4.Install requirements ( **note** remmeber to active your virtual environment)
 > $ pip install -r requirements.txt
 
 -------------------
-6.Migrate your project
+5.Migrate your project
 > $ python manage.py migrate
 
+--------------------
+6.Create your super user
+
+> $ python manage.py createsuperuser
+
+----------------------
+7.Start project
+> $ python manage.py runserver
+
+----------------------
+## Login with your created super http://localhost:8000/api/admin/
+
+## check for documentation http://localhost:8000/redoc/
+
+--------------------------------------------
 **note** that each user must have below fields:
 - email
 - username
