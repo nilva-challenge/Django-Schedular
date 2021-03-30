@@ -32,9 +32,9 @@ normal users can only see their information and can not edit it.
 
 Tasks
 ----------------
-superusers again have all permissions. they can create, edit tasks for theirselves or others.
-admins can do same but for normal users or admin users. they can not edit or create new task for superusers.
-normals can only see or edit or create tasks for normal users.
+- superusers again have all permissions. they can create, edit, delete tasks for theirselves or others\
+- admins can do same as superusers but just for normal users or admin users. they can not edit or create new task for superusers\
+- normals can only see or create or filter tasks for themselves.
 
 Road Map
 ===================
