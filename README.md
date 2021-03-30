@@ -88,10 +88,19 @@ venv link : https://docs.python.org/3/library/venv.html
 
 -----------------------------
 
-4.## PostgreSQL
+4.install postgres\
+
 Download Link: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 - Create a Database (Check ch_nilva/ch_nilva/settings.py for database name)
 - create a Login/Group Roles (Check ch_nilva/ch_nilva/settings.py for user and password)
+
+--------------------------------
+5.Install requirements\
+> $ pip install -r requirements.txt
+
+-------------------
+6.Migrate your project
+> $ python manage.py migrate
 
 **note** that each user must have below fields:
 - email
