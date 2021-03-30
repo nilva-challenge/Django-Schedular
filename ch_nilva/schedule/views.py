@@ -3,9 +3,7 @@ from .serializer import TaskSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from django.http.response import HttpResponse
-from django.core.mail import send_mail
 from . import tasks
-from django.shortcuts import get_object_or_404
 
 
 class TaskList(ListAPIView):
@@ -13,10 +11,14 @@ class TaskList(ListAPIView):
     permission_classes = [IsAuthenticated, ]
 
     def get_queryset(self):
+        user = self.request.user
         query = Task.objects.all()
-        if not self.request.is_admin:
+        if user.is_superuser:
+            return query
+        elif user.is_admin:
+            return query.filter(owner__is_superuser=False)
+        else:
             return query.filter(owner=self.request.user)
-        return query
 
 
 def index(request):
