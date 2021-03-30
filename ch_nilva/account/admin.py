@@ -1,13 +1,26 @@
 from django.contrib import admin
 from .models import User
-from django import forms
 from schedule.models import Task
+from django.urls import reverse
+from django.utils.html import format_html
+from django.utils.http import urlencode
 
 
 @admin.register(User)
 class CustomAccountAdmin(admin.ModelAdmin):
-    list_display = ('username', 'get_fullname', 'is_admin', 'is_superuser',)
+    list_display = ('username', 'get_fullname', 'is_admin', 'is_superuser', 'get_link_owner_task')
     list_filter = ('username', 'email', 'is_admin',)
+
+    def get_link_owner_task(self, obj):
+        count = len(Task.objects.filter(owner=obj))
+        url = (
+                reverse("admin:schedule_task_changelist")
+                + '?'
+                + urlencode({"owner__id__exact": f"{obj.id}"})
+        )
+        return format_html('<a href="{}">{} Tasks</a>', url, count)
+
+    get_link_owner_task.short_description = 'Tasks'
 
     def get_fullname(self, obj):
         return obj.first_name + ' ' + obj.last_name
