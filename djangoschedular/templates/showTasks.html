@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" style="text-align:center;">
+<!--{{ user.username }}-->
+        {% for item in tasks %}
+    {{ item.owner }}
+    <br><br>
+    {{ item.title }}
+    <br><br>
+    {{ item.descriptions }}
+    <br><br>
+    added:{{ item.publish|timesince }}
+    <br><br>
+    {{ item.publish }}
+    <br><br>
+    {{ item.preTask }}
+    <hr>
+{% endfor %}
+
+</div>
+</body>
+</html>
