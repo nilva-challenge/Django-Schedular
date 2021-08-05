@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>django schedule</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB">
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+                {% csrf_token %}
+                <div class="form-group">
+                        <div class="col-md-6">
+                            <input required type="text" id="title" name="title" class="form-control" placeholder="Task Title">
+                        </div>
+                        {% if perms.main.master_user %}
+                        <div class="col-md-6">
+
+                                <select id="owner" name="owner" class="select-chosen" data-placeholder="Choose a User..." style="width: 250px;">
+
+                                        {% for i in user %}
+                                        <option value="{{i.pk}}">{{i.username}}</option>
+                                        {% endfor %}
+
+
+                                    </select>
+
+                        </div>
+                        {%endif%}
+                    </div>
+
+                    <div class="form-group">
+
+                                <div class="form-group">
+                            <div class="col-md-6">
+                                <textarea required type="text" id="descriptions" name="descriptions" rows="3" class="form-control" placeholder="Task Description"></textarea>
+                            </div>
+
+
+
+                            <div class="col-md-2">
+                                <input required type="time" id="time_to_send" name="time_to_send" class="form-control" placeholder="Time To Send">
+                            </div>
+
+                                    <div class="col-md-6">
+                                <textarea required type="text" id="preTask" name="preTask" rows="3" class="form-control" placeholder="preTask"></textarea>
+                            </div>
+
+
+                        </div>
+
+
+
+                            <div class="form-group">
+                                    <div class="col-md-12">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                        </div>
+
+                                </div>
+
+
+
+
+
+
+    </form>
+</body>
+</html>
