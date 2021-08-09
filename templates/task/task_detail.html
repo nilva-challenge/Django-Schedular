@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">title: {{task.title}}</h1>
+        
+    </div>
+     
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">informations</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <label for="owner">owner: </label>
+                    <span id="owner">{{task.owner.username}}</span>
+                </div>
+
+                <div class="col-6">
+                    <label for="times">time to send: </label>
+                    <span id="times">{{task.time_to_send}}</span>
+                </div>
+
+                <div class="col-12">
+                    <label for="description">description: </label>
+                    <span id="description">{{task.description}}</span>
+                </div>
+
+                <div class="col-12">
+                    <label for="precondition_tasks">precondition tasks: </label>
+                    <div id="precondition_tasks" class="row">
+                        {% for pre_task in task.precondition_tasks.all %}
+                            <span class="ml-3" >{{pre_task.title}}</span>
+                            <span>,</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,5 @@
+# ignore all logs
+*.env
+*.bak
+*.dat
+*.dir

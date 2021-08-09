@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %} 
+
+{% block content %}
+
+<div class="container-fluid">
+    {{ form.non_field_errors}}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Create New Task</h6>
+        </div>
+        <div class="card-body">
+            <form method="POST">{% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="form-group col-md-9 mb-0">
+                        {{ form.title|as_crispy_field }}
+                    </div>
+
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.time_to_send|as_crispy_field }}
+                    </div>
+
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.precondition_tasks|as_crispy_field }}
+                    </div>
+
+                    {% if user.permission == 'A' %}
+                        <div class="form-group col-md-3 mb-0">
+                            {{ form.owner|as_crispy_field }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group col-md-9 mb-0">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+
+                </div>
+        
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Create</button>
+                </div>
+        
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

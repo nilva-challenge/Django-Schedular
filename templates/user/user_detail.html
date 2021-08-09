@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">username: {{object.username}}</h1>
+        
+    </div>
+     
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">informations</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <label for="first_name">first name: </label>
+                    <span id="first_name">{{object.first_name}}</span>
+                </div>
+
+                <div class="col-4">
+                    <label for="last_name">last name: </label>
+                    <span id="last_name">{{object.last_name}}</span>
+                </div>
+
+                <div class="col-4">
+                    <label for="email">email: </label>
+                    <span id="email">{{object.email}}</span>
+                </div>
+
+                <div class="col-6">
+                    <label for="tasks">tasks: </label>
+                    <div id="tasks" class="row">
+                        {% for task in object.task_set.all %}
+                            <span class="ml-3" >{{task.title}}</span>
+                            <span>,</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                  
+                <div class="col-6">
+                    <label for="permission">permission: </label>
+                    <span id="permission">{{object.permission}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
