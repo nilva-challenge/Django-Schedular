@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% for task in tasks %}
+                <div class="column">
+                    <div class="card project">
+                        <a href="{% url 'task' task.id %}" class="task">
+                            
+                            <div class="card__body">
+                                <h3 class="project__title">{{task.title}}</h3>
+                               
+                                
+                                <div class="project__tags">
+                                    {% for tag in task.pre_tasks.all %}
+                                    <span class="tag tag--pill tag--main">
+                                         <small> {{tag.title}}</small>
+                                    </span>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+{% endblock content %}
