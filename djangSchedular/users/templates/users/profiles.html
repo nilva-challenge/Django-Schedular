@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block content %}
+{% for profile in profiles %}
+                <div class="column">
+                    <div class="card project">
+                        <a href="{% url 'profile' profile.id %}" class="profile">
+                            
+                            <div class="card__body">
+                                <h3 class="profile__title">{{profile.username}}</h3>
+                                <h5>{{profile.email}}</h5>
+                               
+                                
+                        
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+{% endblock content %}
