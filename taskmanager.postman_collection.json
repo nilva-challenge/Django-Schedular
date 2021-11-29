@@ -1,0 +1,476 @@
+{
+    "info": {
+        "_postman_id": "79acdbe1-dcb3-4ef3-ae73-b9d160dd15e1",
+        "name": "taskmanager",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [{
+            "name": "http://127.0.0.1:8000/taskmanager/signup/",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"mortezall\",\n    \"email\": \"hajiabadi1377@gmail.com\",\n    \"password\": \"morteza\",\n    \"first_name\": \"morteza\",\n    \"last_name\": \"hajiabadi\",\n    \"permissions\": 2\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8000/taskmanager/signup/",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "taskmanager",
+                        "signup",
+                        ""
+                    ]
+                }
+            },
+            "response": [{
+                    "name": "http://127.0.0.1:8000/taskmanager/signup/",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"morteza\",\n    \"email\": \"hajiabadi1377@gmail.com\",\n    \"password\": \"12345678\",\n    \"first_name\": \"morteza\",\n    \"last_name\": \"hajiabadi\",\n    \"permissions\": 1\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:8000/taskmanager/signup/",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "taskmanager",
+                                "signup",
+                                ""
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [{
+                            "key": "Date",
+                            "value": "Mon, 29 Nov 2021 12:37:24 GMT"
+                        },
+                        {
+                            "key": "Server",
+                            "value": "WSGIServer/0.2 CPython/3.8.10"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept"
+                        },
+                        {
+                            "key": "Allow",
+                            "value": "POST, OPTIONS"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "DENY"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "44"
+                        },
+                        {
+                            "key": "X-Content-Type-Options",
+                            "value": "nosniff"
+                        },
+                        {
+                            "key": "Referrer-Policy",
+                            "value": "same-origin"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "[\n    \"179d5c67e972221ed66204fb3986a04f0eb37f09\"\n]"
+                },
+                {
+                    "name": "http://127.0.0.1:8000/taskmanager/signup/",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"mortezatm\",\n    \"email\": \"mortezataghddomi99@gmail.com\",\n    \"password\": \"12345678\",\n    \"first_name\": \"morteza\",\n    \"last_name\": \"taghaddomi\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:8000/taskmanager/signup/",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "taskmanager",
+                                "signup",
+                                ""
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [{
+                            "key": "Date",
+                            "value": "Mon, 29 Nov 2021 12:34:41 GMT"
+                        },
+                        {
+                            "key": "Server",
+                            "value": "WSGIServer/0.2 CPython/3.8.10"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept"
+                        },
+                        {
+                            "key": "Allow",
+                            "value": "POST, OPTIONS"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "DENY"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "44"
+                        },
+                        {
+                            "key": "X-Content-Type-Options",
+                            "value": "nosniff"
+                        },
+                        {
+                            "key": "Referrer-Policy",
+                            "value": "same-origin"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "[\n    \"7e21ad84a88cf7979d3cf5907121e6838b981969\"\n]"
+                },
+                {
+                    "name": "http://127.0.0.1:8000/taskmanager/signup/",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"hamed\",\n    \"email\": \"hamed1377@gmail.com\",\n    \"password\": \"12345678\",\n    \"first_name\": \"hamed\",\n    \"last_name\": \"hamed\",\n    \"permissions\": 1\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:8000/taskmanager/signup/",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "taskmanager",
+                                "signup",
+                                ""
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [{
+                            "key": "Date",
+                            "value": "Mon, 29 Nov 2021 12:42:43 GMT"
+                        },
+                        {
+                            "key": "Server",
+                            "value": "WSGIServer/0.2 CPython/3.8.10"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept"
+                        },
+                        {
+                            "key": "Allow",
+                            "value": "POST, OPTIONS"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "DENY"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "44"
+                        },
+                        {
+                            "key": "X-Content-Type-Options",
+                            "value": "nosniff"
+                        },
+                        {
+                            "key": "Referrer-Policy",
+                            "value": "same-origin"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "[\n    \"6a3920e30a54010655917155a6bd03c901b7f45c\"\n]"
+                }
+            ]
+        },
+        {
+            "name": "http://127.0.0.1:8000/taskmanager/deletetask/1/",
+            "request": {
+                "auth": {
+                    "type": "apikey",
+                    "apikey": [{
+                            "key": "value",
+                            "value": "Token c07cd0d09459b81df1ce27baaf857c16b10d4338",
+                            "type": "string"
+                        },
+                        {
+                            "key": "key",
+                            "value": "Authorization",
+                            "type": "string"
+                        },
+                        {
+                            "key": "in",
+                            "value": "header",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8000/taskmanager/deletetask/1/",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "taskmanager",
+                        "deletetask",
+                        "1",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8000/taskmanager/addtask/",
+            "protocolProfileBehavior": {
+                "disabledSystemHeaders": {}
+            },
+            "request": {
+                "auth": {
+                    "type": "apikey",
+                    "apikey": [{
+                            "key": "value",
+                            "value": "Token d385486ae74f50d06c7d0b6f9f1da2ca1b69afac",
+                            "type": "string"
+                        },
+                        {
+                            "key": "key",
+                            "value": "Authorization",
+                            "type": "string"
+                        },
+                        {
+                            "key": "in",
+                            "value": "header",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"title\": \"morteza task2\",\n    \"description\": \"third task\",\n    \"time_to_send\": \"2021-11-29 20:03\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8000/taskmanager/addtask/",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "taskmanager",
+                        "addtask",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8000/taskmanager/viewtask/3/",
+            "request": {
+                "auth": {
+                    "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8000/taskmanager/viewtask/3/",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "taskmanager",
+                        "viewtask",
+                        "3",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8000/taskmanager/edittask/3/",
+            "request": {
+                "auth": {
+                    "type": "apikey",
+                    "apikey": [{
+                            "key": "value",
+                            "value": "Token c07cd0d09459b81df1ce27baaf857c16b10d4338",
+                            "type": "string"
+                        },
+                        {
+                            "key": "key",
+                            "value": "Authorization",
+                            "type": "string"
+                        },
+                        {
+                            "key": "in",
+                            "value": "header",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"title\": \"newtask1\",\n    \"description\": \"new first task\",\n    \"time_to_send\": \"2021-11-29 20:00\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8000/taskmanager/edittask/3/",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "taskmanager",
+                        "edittask",
+                        "3",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://127.0.0.1:8000/taskmanager/signin/",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"hesam\",\n    \"password\": \"hesam\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:8000/taskmanager/signin/",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "taskmanager",
+                        "signin",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
