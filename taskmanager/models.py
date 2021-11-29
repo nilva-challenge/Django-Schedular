@@ -5,6 +5,7 @@ from django.conf import settings
 
 class User(AbstractUser):
     USER_TYPE_CHOICES = ((1, 'Admin'), (2, 'Normal'))
+    email = models.EmailField(max_length=50, null=False, unique=True)
     first_name = models.CharField(max_length=50, null=False)
     last_name = models.CharField(max_length=50, null=False)
     permissions = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=False)

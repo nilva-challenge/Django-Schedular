@@ -2,35 +2,38 @@ from django.contrib import admin
 from .models import Task, User
 from django.contrib import messages
 
+
 class TaskNormalUser(admin.ModelAdmin):
-    
+
     def has_change_permission(self, request, obj=None):
-        return obj is None or request.user.permissions == 1
-    
+        return request.user.permissions == 1
+
     def has_view_permission(self, request, obj=None):
         return True
-    
+
     def has_add_permission(self, request, obj=None):
-        return obj is None or request.user.permissions == 1
-    
+        return True
+
     def has_delete_permission(self, request, obj=None):
-        return obj is None or request.user.permissions == 1
+        return request.user.permissions == 1
+
 
 class NormalUserAdmin(admin.ModelAdmin):
-    
+
     def has_change_permission(self, request, obj=None):
-        return False
-    
+        return request.user.permissions == 1
+
     def has_view_permission(self, request, obj=None):
-        return True
-    
+        return request.user.permissions == 1
+
     def has_add_permission(self, request, obj=None):
-        return False
+        return request.user.permissions == 1
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return request.user.permissions == 1
     
-admin.site.register(User)
-# admin.site.register(AdminUser)
-# admin.site.register(NormalUser)
-admin.site.register(Task)
+    
+
+
+admin.site.register(User, NormalUserAdmin)
+admin.site.register(Task, TaskNormalUser)

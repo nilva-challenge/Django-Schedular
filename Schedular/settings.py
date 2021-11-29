@@ -37,17 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'rest_auth',
-    # 'rest_auth.registration',
-    # 'rest_framework',
-    # 'rest_framework.authtoken',
     'rest_framework',
     'rest_framework.authtoken',
     'taskmanager.apps.TaskmanagerConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -138,3 +131,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SITE_ID = 1
+
+# Email Configs
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com'
+EMAIL_HOST_PASSWORD = 'email_password'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

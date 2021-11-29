@@ -14,7 +14,6 @@ class SignUp(APIView):
         data = request.data
         serializer = SignUpUserSerializer(data=data)
         if serializer.is_valid():
-            print(serializer.data)
             user = User.objects.create_user(
                 password=data['password'], email=data['email'],
                 username=data['username'], first_name=data['first_name'], last_name=data['last_name'],
@@ -33,7 +32,6 @@ class SignIn(APIView):
             user = User.objects.filter(username=username).first()
             if user is None:
                 return Response("username is wrong ", status=status.HTTP_400_BAD_REQUEST)
-            print(user)
             if user.check_password(raw_password=password):
                 token = Token.objects.filter(user=user).first()
                 data = {}
@@ -55,7 +53,6 @@ def add_task(request):
     data['owner_id'] = user.id
     serializer = TaskSerializer(data=data)
     if serializer.is_valid():
-        print(serializer.validated_data)
         task = serializer.create(serializer.validated_data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -71,7 +68,6 @@ def delete_task(request, task_id):
         task = Task.objects.filter(pk=task_id, owner_id=user.id).first()
         if task is None:
             return Response({"status": 3003}, status=status.HTTP_400_BAD_REQUEST)
-        print(task)
         task.delete()
         return Response({"status": 3000}, status=status.HTTP_200_OK)
     except Exception as e:
@@ -85,7 +81,6 @@ def view_task(request, task_id):
         task = Task.objects.filter(pk=task_id).first()
         if task is None:
             return Response({"status": 3003}, status=status.HTTP_400_BAD_REQUEST)
-        print(task.description)
         serializer = TaskSerializer_out(task)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except:
@@ -101,7 +96,6 @@ def edit_task(request, task_id):
         if task is None:
             return Response({"status": 2001}, status=status.HTTP_400_BAD_REQUEST)
         serializer = TaskSerializer(data=request.data, partial=True)
-        print(request.data)
         if serializer.is_valid():
             task = serializer.update(task, serializer.validated_data)
         return Response({"status": 2000}, status=status.HTTP_200_OK)
