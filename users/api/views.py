@@ -7,8 +7,9 @@ from .serializers import UserSerializer, LoginSerializer
 
 
 class RegistrationAPIView(APIView):
+    serializer_class = UserSerializer
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()  # Save the user as a normal user
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -17,20 +18,14 @@ class RegistrationAPIView(APIView):
 
 class LoginAPIView(APIView):
     def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            username = serializer.validated_data['username']
-            password = serializer.validated_data['password']
+        email = request.data.get('email').lower()  # Assuming email input is expected in the request
+        password = request.data.get('password')
+        user = authenticate(email=email, password=password)  # Authenticate using email
 
-            user = authenticate(request, username=username, password=password)  # Authenticate user
-
-            if user is not None:
-                login(request, user)
-                return Response({'detail': 'Login successful'}, status=status.HTTP_200_OK)
-            else:
-                return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if user is not None:
+            login(request, user)
+            return Response({'detail': 'Login successful'}, status=status.HTTP_200_OK)
+        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutAPIView(APIView):
