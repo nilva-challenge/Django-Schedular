@@ -1,103 +1,35 @@
-# In name of Allah
+# Django Task Scheduler Project
 
 ## Introduction
-We want a simple app to schedule & validate tasks for users. It should be possible to use django admin as interface for this application.
+This Django project is designed to manage and schedule tasks for users, with a focus on providing a robust and scalable API. Key features include task creation, update, deletion, and scheduling tasks to send email reminders using Celery.
 
-There are two kind of users:
-- normal users
-- admin users
+## Initial Setup and Planning
+- **Project Initiation**: The project commenced with the goal of creating an efficient task management system using Django and Django REST Framework.
+- **Requirements Gathering**: Functional requirements were identified, including user authentication, task management, and scheduled notifications.
+- **Planning Tools**: Utilized Trello for task tracking and breakdown, ensuring organized and phased development.
 
-**note** that each user must have below fields:
-- email
-- username
-- password
-- first name
-- last name
-- permissions (admin & normal)
+## Development Phases
 
-You should extend AbstractUser for implementing user model.
+### Phase 1: Project Setup
+- **Setting Up the Development Environment**: Configured a virtual environment, installed Django and necessary dependencies.
+- **Version Control Setup**: Initialized a Git repository with Git Flow, establishing a systematic branching strategy for features, releases, and hotfixes.
 
-normal users can only see, filter & add to their own tasks. These tasks will have a title, description, owner, time to send and precondition tasks field. the task should be scheduled to send an email to its owner at the specified time (use celery for this purpose) **Note** that every task has a set of precondition tasks (which are tasks as well) meaning for a task to be done, first, the set of tasks defined for it should have been done by the time it needs to be sent, otherwise the task will not be considered done. Also definition of done for a task is if it was sent at the specified time.
+### Phase 2: Core Feature Implementation
+- **Building the Models**: Developed a `CustomUser` model extending `AbstractUser` and a `Task` model with fields for title, description, owner, schedule time, and pre-tasks.
+- **Creating Views and Serializers**: Implemented API views using `APIView` for handling CRUD operations and serializers for data validation and serialization.
+- **Integrating Celery for Task Scheduling**: Set up Celery with Redis as the broker to handle asynchronous task scheduling for email notifications.
 
-admin users have the permission to manage users, add to them and delete them. Also they can manage all tasks of users, add task for them and edit their tasks. When created or edited, scheduled tasks should be added or edited.
+### Phase 3: Testing and Refinement
+- **Writing Unit Tests**: Comprehensive tests written for models, views, and serializers to ensure reliability and correctness.
+- **Refactoring and Code Review**: Code was continuously refactored and reviewed for optimization and adherence to best practices.
 
-### Note
-Write an API for validating a set of tasks (validation means if the set of tasks is possible to be done or not). If there is a precondition task which is not in the specified set of tasks, you do not need to consider it.
+### Phase 4: Additional Features and Enhancements
+- **Implementing Additional Features**: Added advanced features like email notifications using Celery.
+- **Optimizations**: Performed query optimizations and code enhancements for better performance.
 
-### Example
+## Challenges and Solutions
+- Faced challenges in Celery integration for task scheduling, which were resolved through meticulous testing and configuration adjustments.
+- Overcame complexities in handling user permissions and task dependencies.
 
-#### example 1
-- Task
-  - id: 1
-  - title: task 1
-  - description: desc 1
-  - owner: nilva.man
-  - time to send: 2020-05-10 10:30
-  - pre-tasks: 
-- Task
-  - id: 2
-  - title: task 2
-  - description: desc 2
-  - owner: nilva.man
-  - time to send: 2020-05-06 10:30
-  - pre-tasks: 
-    - 1
-    - 3
-- Task
-  - id: 3
-  - title: task 3
-  - description: desc 3
-  - owner: nilva.man
-  - time to send: 2020-02-10 9:30
-  - pre-tasks: 
-
-result: **No**, task 1 happens after task 2, but is a precondition of task 2, which makes it impossible to happen
-
-#### example 2
-- Task
-  - id: 1
-  - title: task 1
-  - description: desc 1
-  - owner: nilva.man
-  - time to send: 2020-05-10 10:30
-  - pre-tasks: 
-- Task
-  - id: 2
-  - title: task 2
-  - description: desc 2
-  - owner: nilva.man
-  - time to send: 2020-06-10 12:30
-  - pre-tasks: 
-    - 1
-    - 3
-- Task
-  - id: 3
-  - title: task 3
-  - description: desc 3
-  - owner: nilva.man
-  - time to send: 2020-06-01 12:30
-  - pre-tasks: 
-    - 1
-
-result: **Yes**, First task 1 will happen, then task 3, then task 2
-
-
-## Expectations
-
-So What does matter to us?
-- a clean structure of codebase & components
-- clean code practices
-- well written unit tests
-- finally, ability to learn
-
-## Tasks
-
-1. Fork this repository
-2. Break and specify your tasks in project management tool (append the image of your tasks to readme file of your project)
-3. Learn & Develop
-4. Push your code to your repository
-5. Explain the roadmap of your development in readme of repository (also append the image of your specified tasks on part 2 to file)
-6. Send us a pull request, we will review and get back to you
-7. Enjoy
-
-**Finally** don't be afraid to ask anything from us.
+## Conclusion and Reflection
+This project was a comprehensive exercise in building a full-featured Django application with RESTful APIs, background task processing, and unit testing. Key learnings include effective Django project structuring, advanced model relationships, and asynchronous task scheduling with Celery.
