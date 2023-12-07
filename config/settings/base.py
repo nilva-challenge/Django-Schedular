@@ -83,10 +83,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
-LOCAL_APPS = [
-    "core.users",
-    # Your stuff: custom apps go here
-]
+LOCAL_APPS = ["core.users", "task"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -333,5 +330,5 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
 }
-# Your stuff...
-# ------------------------------------------------------------------------------
+# Webneshin
+MAX_SECONDS_TO_DONE_TASK = 60 * 5
