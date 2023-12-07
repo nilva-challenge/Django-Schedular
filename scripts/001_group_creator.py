@@ -1,5 +1,3 @@
-from time import sleep
-
 from django.contrib.auth.models import Group, Permission
 
 
@@ -8,8 +6,6 @@ def group_creators():
     groups = Group.objects.first()
     if groups:
         return
-
-    sleep(10)
 
     # user permissions
     user_permissions = Permission.objects.filter(codename__in=["add_user", "change_user", "delete_user", "view_user"])
