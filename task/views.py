@@ -12,7 +12,6 @@ class TaskValidatorAPIView(APIView):
     # def get_serializer_class(self):
     #     if self.action == "post":
     #         return TaskValidatorSerializer
-    #     return TaskValidatorSerializer
 
     def post(self, request):
         # serializing
