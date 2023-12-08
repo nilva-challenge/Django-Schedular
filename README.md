@@ -33,14 +33,14 @@ Write an API for validating a set of tasks (validation means if the set of tasks
   - description: desc 1
   - owner: nilva.man
   - time to send: 2020-05-10 10:30
-  - pre-tasks: 
+  - pre-tasks:
 - Task
   - id: 2
   - title: task 2
   - description: desc 2
   - owner: nilva.man
   - time to send: 2020-05-06 10:30
-  - pre-tasks: 
+  - pre-tasks:
     - 1
     - 3
 - Task
@@ -49,7 +49,7 @@ Write an API for validating a set of tasks (validation means if the set of tasks
   - description: desc 3
   - owner: nilva.man
   - time to send: 2020-02-10 9:30
-  - pre-tasks: 
+  - pre-tasks:
 
 result: **No**, task 1 happens after task 2, but is a precondition of task 2, which makes it impossible to happen
 
@@ -60,14 +60,14 @@ result: **No**, task 1 happens after task 2, but is a precondition of task 2, wh
   - description: desc 1
   - owner: nilva.man
   - time to send: 2020-05-10 10:30
-  - pre-tasks: 
+  - pre-tasks:
 - Task
   - id: 2
   - title: task 2
   - description: desc 2
   - owner: nilva.man
   - time to send: 2020-06-10 12:30
-  - pre-tasks: 
+  - pre-tasks:
     - 1
     - 3
 - Task
@@ -76,7 +76,7 @@ result: **No**, task 1 happens after task 2, but is a precondition of task 2, wh
   - description: desc 3
   - owner: nilva.man
   - time to send: 2020-06-01 12:30
-  - pre-tasks: 
+  - pre-tasks:
     - 1
 
 result: **Yes**, First task 1 will happen, then task 3, then task 2
@@ -101,3 +101,10 @@ So What does matter to us?
 7. Enjoy
 
 **Finally** don't be afraid to ask anything from us.
+
+
+## Descriptions
+Hello
+I prefer to send additional details by email.
+
+Thanks for your trust.
