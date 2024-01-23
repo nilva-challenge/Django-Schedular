@@ -8,7 +8,7 @@ User = get_user_model()
 class Task(BaseModel, models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    owner = models.OneToOneField(
+    owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='owner_tasks'

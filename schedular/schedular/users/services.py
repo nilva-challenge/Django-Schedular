@@ -1,18 +1,27 @@
-from django.db import transaction 
-from .models import BaseUser, Profile
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate
+from django.db import transaction
+from typing import Dict, Union
+from django.shortcuts import Http404
 
-
-def create_profile(*, user:BaseUser, bio:str | None) -> Profile:
-    return Profile.objects.create(user=user, bio=bio)
-
-def create_user(*, email:str, password:str) -> BaseUser:
-    return BaseUser.objects.create_user(email=email, password=password)
+User = get_user_model()
 
 
 @transaction.atomic
-def register(*, bio:str|None, email:str, password:str) -> BaseUser:
+def register(data: Dict[str, any]) -> User:
+    data.pop('confirm_password')
+    return User.objects.create_user(**data)
 
-    user = create_user(email=email, password=password)
-    create_profile(user=user, bio=bio)
 
-    return user
+
+def login_user(request, data: Dict[str, any]) -> Union[Dict[str, str] | Http404]:
+    username = data.get('username')
+    password = data.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        refresh = RefreshToken.for_user(user)
+        access_token = {'refresh': str(refresh), 'access': str(refresh.access_token)}
+        return access_token
+    else:
+        raise Http404({'detail': 'Invalid credentials'})

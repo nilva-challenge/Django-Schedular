@@ -23,17 +23,17 @@ class TaskAPI(APIView):
 
     def get(self, request):
         query = get_tasks(user=request.user)
-        return Response(self.OutputTaskSerializer(query).data, status=status.HTTP_200_OK)
+        return Response(self.OutputTaskSerializer(query, many=Task).data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        data = self.InputTaskSerializer(request.data)
+        data = self.InputTaskSerializer(data=request.data)
         data.is_valid(raise_exception=True)
         task_service = TaskService(user=request.user, data=data.validated_data)
         task = task_service.create_task()
         return Response(self.OutputTaskSerializer(task).data, status=status.HTTP_201_CREATED)
 
     def patch(self, request, id):
-        data = self.InputTaskSerializer(request.data)
+        data = self.InputTaskSerializer(data=request.data)
         data.is_valid(raise_exception=True)
         task_service = TaskService(user=request.user, data=data.validated_data, id=id)
         task = task_service.update_task()
