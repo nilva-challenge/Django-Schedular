@@ -14,7 +14,6 @@ def register(data: Dict[str, any]) -> User:
     return User.objects.create_user(**data)
 
 
-
 def login_user(request, data: Dict[str, any]) -> Union[Dict[str, str] | Http404]:
     username = data.get('username')
     password = data.get('password')
