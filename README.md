@@ -22,7 +22,7 @@ docker compose -f docker-compose.yml up -d
 ```
 
 ## Road map of development
-![Development Roadmap](img.png)
+![Development Roadmap](schedular/img.png)
 
 1- Step one 
 ##
