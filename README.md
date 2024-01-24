@@ -23,6 +23,7 @@ docker compose -f docker-compose.yml up -d
 
 ## Road map of development
 ![Development Roadmap](img.png)
+![Screenshot from 2024-01-24 21-39-22.png](..%2F..%2F..%2F..%2F..%2FPictures%2FScreenshots%2FScreenshot%20from%202024-01-24%2021-39-22.png)
 
 
 1. In the beginning, I decided to spend some time thinking about the task and write down the steps I need to take on paper. After that, I decided to break down the development process into three sections.
