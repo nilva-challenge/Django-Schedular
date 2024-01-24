@@ -14,10 +14,7 @@ class Task(BaseModel, models.Model):
         related_name='owner_tasks'
     )
     time_to_send = models.DateTimeField()
-    precondition_tasks = models.ManyToManyField(
-        'self', blank=True,
-        related_name='pre_tasks'
-    )
+    precondition_tasks = models.ForeignKey('self', blank=True, related_name='pre_tasks', on_delete=models.CASCADE, null=True)
     sent = models.BooleanField(default=False)
 
     def __str__(self):

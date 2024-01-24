@@ -3,9 +3,9 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import BadRequest
 from schedular.schedule.models import Task
 from django.db.models import QuerySet
+from typing import Dict, List, Union
 from django.http import Http404
 from .email import EmailService
-from typing import Dict
 
 User = get_user_model()
 
@@ -31,20 +31,14 @@ class TaskService:
         self.id = id
 
     def create_task(self) -> Task:
-        pre_task = self.data.pop('precondition_tasks')
         task = Task.objects.create(owner=self.user, **self.data)
-        task.precondition_tasks.set(pre_task)
         return task
 
     def update_task(self, id: int) -> Task:
-        pre_task = self.data.pop('precondition_tasks')
         task = self.get_task(id=id)
 
         for key, value in self.data.items():
             setattr(task, key, value)
-
-        if pre_task is not None:
-            task.precondition_tasks.set(pre_task)
 
         task.save()
         return task
@@ -90,11 +84,56 @@ class SendEmailForTaskOwnerService:
             task = Task.objects.select_related('owner').prefetch_related('precondition_tasks').get(id=task_id)
         except Task.DoesNotExist:
             raise Http404
-        self.check_preconditions_tasks(task.precondition_tasks)
+        self.check_preconditions_tasks(task)
         return task
 
     @staticmethod
-    def check_preconditions_tasks(pre_tasks: QuerySet[Task]) -> None:
-        for task in pre_tasks.all():
-            if task.sent is False:
+    def check_preconditions_tasks(pre_tasks: Task) -> None:
+        pre_tasks = pre_tasks.pre_tasks.all()
+        for pre_task in pre_tasks:
+            if pre_task.sent is False:
                 raise BadRequest('The prerequisites for this task have not been met')
+
+
+class ValidateTaskService:
+    """
+      A service class for validating tasks based on their time-to-send properties and preconditions.
+
+      Attributes:
+          user (User): The user for whom the validation is performed.
+          ids (List[int]): List of task IDs to be validated.
+    """
+
+    def __init__(self, user: User, ids: List[int]) -> None:
+        self.user = user
+        self.ids = ids
+
+    @staticmethod
+    def check_if_tasks_send_time_is_correct(tasks: QuerySet[Task]) -> Union[List[int], str]:
+        can_execute = []
+
+        for task in tasks:
+
+            if not task.precondition_tasks:
+                can_execute.append(task.id)
+
+            if task.precondition_tasks:
+                pre_task = task.precondition_tasks
+
+                if pre_task.time_to_send >= task.time_to_send:
+                    return f"{pre_task.title} run before {task.title} and it's impossible to run because {task.title} is dependese on {pre_task.title}"
+
+                if pre_task.time_to_send <= task.time_to_send:
+                    can_execute.append(task.id)
+
+        return can_execute
+
+    def get_tasks(self) -> QuerySet[Task]:
+        if self.user.is_superuser:
+            tasks = Task.objects.prefetch_related('precondition_tasks').filter(id__in=self.ids)
+        else:
+            tasks = Task.objects.prefetch_related('precondition_tasks').filter(owner=self.user, id__in=self.ids)
+
+        if len(tasks) <= 1:
+            raise BadRequest('at least tow task need for validation')
+        return tasks.order_by('time_to_send')
