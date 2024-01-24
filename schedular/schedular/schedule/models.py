@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.auth import get_user_model
 from schedular.common.models import BaseModel
+from django.db import models
 
 User = get_user_model()
 

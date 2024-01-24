@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
 from django.core.mail import EmailMessage
+from abc import ABC, abstractmethod
 
 
 class EmailService(ABC):

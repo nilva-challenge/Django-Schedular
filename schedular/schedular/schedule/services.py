@@ -1,9 +1,9 @@
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from django.core.exceptions import BadRequest
+from schedular.schedule.models import Task
 from django.db.models import QuerySet
 from django.http import Http404
-from django.shortcuts import get_object_or_404
-from schedular.schedule.models import Task
 from .email import EmailService
 from typing import Dict
 
@@ -47,7 +47,6 @@ class TaskService:
 
 class SendEmailForTaskOwnerService:
     def __init__(self, email_service: EmailService) -> None:
-        print('ee', 40 * '*')
         self.email_service = email_service
 
     def send_email_and_change_task_status(self, task_id: int) -> None:

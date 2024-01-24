@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from schedular.schedule.selectors import get_tasks
 from rest_framework.response import Response
@@ -21,10 +22,12 @@ class TaskAPI(APIView):
             model = Task
             fields = '__all__'
 
+    @extend_schema(responses=OutputTaskSerializer)
     def get(self, request):
         query = get_tasks(user=request.user)
         return Response(self.OutputTaskSerializer(query, many=Task).data, status=status.HTTP_200_OK)
 
+    @extend_schema(request=InputTaskSerializer, responses=OutputTaskSerializer)
     def post(self, request):
         data = self.InputTaskSerializer(data=request.data)
         data.is_valid(raise_exception=True)
@@ -32,6 +35,7 @@ class TaskAPI(APIView):
         task = task_service.create_task()
         return Response(self.OutputTaskSerializer(task).data, status=status.HTTP_201_CREATED)
 
+    @extend_schema(request=InputTaskSerializer, responses=OutputTaskSerializer)
     def patch(self, request, id):
         data = self.InputTaskSerializer(data=request.data)
         data.is_valid(raise_exception=True)

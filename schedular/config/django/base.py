@@ -14,11 +14,9 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 # Application definition
 LOCAL_APPS = [
-    'schedular.core.apps.CoreConfig',
     'schedular.common.apps.CommonConfig',
     'schedular.users.apps.UsersConfig',
     'schedular.schedule.apps.ScheduleConfig',
-    'schedular.authentication.apps.AuthenticationConfig',
 ]
 
 THIRD_PARTY_APPS = [

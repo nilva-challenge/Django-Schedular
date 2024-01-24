@@ -1,9 +1,9 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
+from django.shortcuts import Http404
 from django.db import transaction
 from typing import Dict, Union
-from django.shortcuts import Http404
 
 User = get_user_model()
 
@@ -11,7 +11,8 @@ User = get_user_model()
 @transaction.atomic
 def register(data: Dict[str, any]) -> User:
     data.pop('confirm_password')
-    return User.objects.create_user(**data)
+    user = User.objects.create_user(**data, is_staff=True)
+    return user
 
 
 def login_user(request, data: Dict[str, any]) -> Union[Dict[str, str] | Http404]:

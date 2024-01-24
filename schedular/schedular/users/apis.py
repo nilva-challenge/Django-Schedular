@@ -1,16 +1,13 @@
-from rest_framework import status
+from .validators import number_validator, special_char_validator, letter_validator
+from schedular.users.services import register, login_user
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.core.validators import MinLengthValidator
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
-
-from django.core.validators import MinLengthValidator
-from .validators import number_validator, special_char_validator, letter_validator
-from schedular.users.models import BaseUser
-from schedular.api.mixins import ApiAuthMixin
-from schedular.users.services import register, login_user
-from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
-
 from drf_spectacular.utils import extend_schema
+from rest_framework import status
+from schedular.users.models import BaseUser
 
 
 class RegisterApi(APIView):
@@ -80,6 +77,7 @@ class LoginAPI(APIView):
         username = serializers.CharField(max_length=100)
         password = serializers.CharField()
 
+    @extend_schema(request=InputLoginSerializer)
     def post(self, request):
         data = self.InputLoginSerializer(data=request.data)
         data.is_valid(raise_exception=True)
