@@ -19,6 +19,7 @@ def login_user(request, data: Dict[str, any]) -> Union[Dict[str, str] | Http404]
     username = data.get('username')
     password = data.get('password')
     user = authenticate(request, username=username, password=password)
+
     if user is not None:
         refresh = RefreshToken.for_user(user)
         access_token = {'refresh': str(refresh), 'access': str(refresh.access_token)}

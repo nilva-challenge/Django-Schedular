@@ -11,6 +11,20 @@ User = get_user_model()
 
 
 class TaskService:
+    """
+        A service class for managing tasks related operations.
+
+        Args:
+            user: The user associated with the task operation.
+            data: Optional. Data to be used for task creation or update.
+            id: Optional. ID of the task to be operated upon.
+
+        Attributes:
+            user: The user associated with the task operation.
+            data: Data to be used for task creation or update.
+            id: ID of the task to be operated upon.
+    """
+
     def __init__(self, user: User, data: Dict[str, any] | None = None, id: int | None = None) -> None:
         self.user = user
         self.data = data
@@ -46,6 +60,16 @@ class TaskService:
 
 
 class SendEmailForTaskOwnerService:
+    """
+        Service class for sending emails to the owner of a task and updating the task status.
+
+        Args:
+            email_service (EmailService): An instance of the EmailService used for sending emails.
+
+        Attributes:
+            email_service (EmailService): The EmailService instance.
+    """
+
     def __init__(self, email_service: EmailService) -> None:
         self.email_service = email_service
 
