@@ -40,10 +40,10 @@ class TaskAPI(APIView):
         data = self.InputTaskSerializer(data=request.data)
         data.is_valid(raise_exception=True)
         task_service = TaskService(user=request.user, data=data.validated_data, id=id)
-        task = task_service.update_task()
+        task = task_service.update_task(id=id)
         return Response(self.OutputTaskSerializer(task).data, status=status.HTTP_202_ACCEPTED)
 
     def delete(self, request, id):
         task_service = TaskService(user=request.user, id=id)
-        task_service.delete_task()
+        task_service.delete_task(id=id)
         return Response(status=status.HTTP_204_NO_CONTENT)

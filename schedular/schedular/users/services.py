@@ -25,4 +25,4 @@ def login_user(request, data: Dict[str, any]) -> Union[Dict[str, str] | Http404]
         access_token = {'refresh': str(refresh), 'access': str(refresh.access_token)}
         return access_token
     else:
-        raise Http404({'detail': 'Invalid credentials'})
+        raise Http404()

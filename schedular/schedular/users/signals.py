@@ -32,4 +32,6 @@ def create_celery_periodic_task(sender, **kwargs):
                 args='[]',
             )
     except Exception as e:
-        print(f"error is {e}")
+        # print(f"error is {e}")
+        # Task Already Exists, it means everything is fine
+        pass

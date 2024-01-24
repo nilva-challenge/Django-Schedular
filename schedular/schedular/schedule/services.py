@@ -25,7 +25,7 @@ class TaskService:
             id: ID of the task to be operated upon.
     """
 
-    def __init__(self, user: User, data: Dict[str, any] | None = None, id: int | None = None) -> None:
+    def __init__(self, user: User, data: Dict[str, any]) -> None:
         self.user = user
         self.data = data
         self.id = id
@@ -36,9 +36,9 @@ class TaskService:
         task.precondition_tasks.set(pre_task)
         return task
 
-    def update_task(self) -> Task:
+    def update_task(self, id: int) -> Task:
         pre_task = self.data.pop('precondition_tasks')
-        task = self.get_task()
+        task = self.get_task(id=id)
 
         for key, value in self.data.items():
             setattr(task, key, value)
@@ -49,14 +49,14 @@ class TaskService:
         task.save()
         return task
 
-    def delete_task(self) -> None:
-        self.get_task().delete()
+    def delete_task(self, id: int) -> None:
+        self.get_task(id=id).delete()
 
-    def get_task(self) -> Task:
+    def get_task(self, id: int) -> Task:
         if self.user.is_superuser:
-            return get_object_or_404(Task, id=self.id)
+            return get_object_or_404(Task, id=id)
         else:
-            return get_object_or_404(Task, owner=self.user, id=self.id)
+            return get_object_or_404(Task, owner=self.user, id=id)
 
 
 class SendEmailForTaskOwnerService:
