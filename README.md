@@ -15,7 +15,7 @@ if user is a superuse (admin), he can check all tasks here
 if he/she is just a normal user with limited permissions, he just can check his own tasks.
 
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/admin_taskList.png">
+<img loading="lazy" style="width:1000px; height:1000px" src="images/admin_taskList.png">
 </div>
 
 <br>
