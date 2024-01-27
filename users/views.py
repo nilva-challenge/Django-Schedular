@@ -103,16 +103,23 @@ class CreateListTaskForOtherByAdminView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get_queryset(self):
-        return Task.objects.select_related('owner').filter(owner_id=self.kwargs['u_pk'], is_deleted=False).all()
+        return Task.objects.select_related('owner').filter(owner_id=self.kwargs['pk'], is_deleted=False).all()
 
     def perform_create(self, serializer):
-        serializer.save(owner_id=self.kwargs['u_pk'], is_done=True)
+        serializer.save(owner_id=self.kwargs['pk'], is_done=True)
 
 
 class RetrieveUpdateDestroyTaskForOtherByAdminView(RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
+    def get_queryset(self):
+        return (
+            Task.objects.select_related('owner')
+            .filter(id=self.kwargs["pk"], is_deleted=False).all()
+        )
+
     def delete(self, request, *args, **kwargs):
-        Task.objects.select_related('owner').filter(id=self.kwargs['t_pk']).update(is_deleted=True)
+        Task.objects.select_related('owner').filter(id=self.kwargs['pk']).update(is_deleted=True)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
