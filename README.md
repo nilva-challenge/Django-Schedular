@@ -15,27 +15,27 @@ if user is a superuse (admin), he can check all tasks here
 if he/she is just a normal user with limited permissions, he just can check his own tasks.
 
 <div align="left" >
-<img loading="lazy" style="width:1000px; height:1000px" src="images/admin_taskList.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/admin_taskList.png">
 </div>
 
 <br>
 
 ### Get Task for an authenticated normal user:
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/task_list_for_user.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/task_list_for_user.png">
 </div>
 <br>
 
 ### POST a task:
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/create_task.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/create_task.png">
 </div>
 <br>
 
 ### Check Task Status:
 if you visit this endpoint and any of your task is done, this will show you those tasks and sending those tasks to your email aswell.
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/check_task_status.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/check_task_status.png">
 </div>
 <br>
 
@@ -48,51 +48,55 @@ if you visit this endpoint and any of your task is done, this will show you thos
 4. firstname
 5. lastname
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/creating_user.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/creating_user.png">
 </div>
 <br>
 
 ### Delete a user:
 auth/users/2
+<br>
+
 Admin users can delete users, Normal users can delete own's profile aswell.
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/deleting_user.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/deleting_user.png">
 </div>
 <br>
 
 ### Create a Jason-Web-Token (access & refresh tokens):
 auth/jwt/create
+<br>
+
 First You need to create a user, then you just kinda log in in this endpoint and get your tokens
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/create_jwt.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/create_jwt.png">
 </div>
 <br>
 
 ### Delete a protected task:
 if you want to delete a task that associated with another task as pretasks of that task, then you can't delete that task
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/delete_a_protected_task.png">
+<img loading="lazy" style="width:1000px; height:200px" src="images/delete_a_protected_task.png">
 </div>
 <br>
 
 ### Delete a unprotected task:
 it means there is no dependeny on this task
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/delete_unprotected_task.png">
+<img loading="lazy" style="width:1000px; height:200px" src="images/delete_unprotected_task.png">
 </div>
 <br>
 
 ### Searching tasks by title:
 tasks/?title=SOMETHING
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/search_by_title.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/search_by_title.png">
 </div>
 <br>
 
 ### Searching tasks by id:
 tasks/?id=1
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/search_by_id.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/search_by_id.png">
 </div>
 <br>
 
@@ -100,7 +104,7 @@ tasks/?id=1
 ### Updating task:
 tasks/2
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/updating_task.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/updating_task.png">
 </div>
 <br>
 
@@ -109,12 +113,14 @@ tasks/2
 If you are an admin, you can see all users data here
 if you are a normal user, you just see your account details here
 <div align="left" >
-<img loading="lazy" style="width:400px; height:600px" src="images/admin_users_list.png">
+<img loading="lazy" style="width:1000px; height:600px" src="images/admin_users_list.png">
 </div>
 <br>
 
 ### User Endpoint:
 To check your profile data and edit that
+<br>
+
 auth/users/me
 <br>
 <br>
