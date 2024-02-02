@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task
+from .models import Task, CeleryJobInfo
 from .utils import is_task_owner
 
 class TaskAdmin(admin.ModelAdmin):
@@ -39,3 +39,5 @@ class TaskAdmin(admin.ModelAdmin):
         return form
 
 admin.site.register(Task, TaskAdmin)
+
+admin.site.register(CeleryJobInfo)
