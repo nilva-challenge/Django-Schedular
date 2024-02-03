@@ -1,0 +1,7 @@
+
+celery==5.3.6
+Django==5.0.1
+djangorestframework==3.14.0
+Faker==22.6.0
+pytest-django==4.8.0
+redis==5.0.1
