@@ -10,4 +10,14 @@ class TaskList(generics.ListAPIView):
     permission_classes = [IsAuthenticated, TaskPermission]
 
     def get_queryset(self):
-        return Task.objects.all()
+        user = self.request.user
+
+        # Check if the user is an admin
+        if user.permissions == 'admin':
+            return Task.objects.all()
+        # If the user is a normal user, only show their tasks
+        elif user.permissions == 'normal':
+            return Task.objects.filter(owner=user)
+
+        # Return an empty queryset if the user has no valid role
+        return Task.objects.none()
