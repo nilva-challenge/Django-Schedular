@@ -139,7 +139,7 @@ EMAIL_HOST = config('EMAIL_HOST', default='sandbox.smtp.mailtrap.io')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='1f8679ff34aad7')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='9670e33c2c490a') # This is a fake account for testing, don't worry guys
 EMAIL_PORT = config('EMAIL_PORT', default='2525')
-EMAIL = config('EMAIL', default='example@example.com')
+EMAIL = config('SENDER_EMAIL', default='example@example.com')
 
 # Celery Configuration
 from celery import Celery
@@ -147,5 +147,6 @@ from celery import Celery
 app = Celery('TaskScheduler')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
