@@ -14,13 +14,6 @@ def assign_task_permissions(sender, instance, created, **kwargs):
         content_type = ContentType.objects.get_for_model(Task)
         permissions = Permission.objects.filter(content_type=content_type)
         instance.user_permissions.add(*permissions)
-        
-
-@receiver(post_save, sender=Task)
-def assign_task_permissions(sender, instance, created, **kwargs):
-    print('hi, test for task')
-    
-    
 
 
 @receiver(post_save, sender=Task)
@@ -36,9 +29,11 @@ def schedule_send_task_email(sender, instance, created, **kwargs):
 
     else:
         # Task is being updated, cancel the existing task and reschedule
-        task = CeleryJobInfo.objects.get(task=instance).celery_job_id
+        task = CeleryJobInfo.objects.get(task=instance)
         if task.celery_job_id:
             AsyncResult(task.celery_job_id).revoke() # Cancel existing task
         
         result = send_task_email.apply_async(args=[instance.id], eta=instance.time_to_send)  # Reschedule task
-        CeleryJobInfo.objects.get(task=instance).update(celery_job_id=result.id)
+        job_info = CeleryJobInfo.objects.get(task=instance)
+        job_info.celery_job_id=result.id
+        job_info.save()
