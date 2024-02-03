@@ -2,8 +2,9 @@ from celery import shared_task
 from django.core.mail import send_mail
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from .models import Task, CeleryJobInfo
+from .models import Task, CeleryJobInfo, TaskValidator
 from django.conf import settings
+
 
 import logging
 
@@ -26,6 +27,11 @@ def send_task_email(task_id):
     except CeleryJobInfo.DoesNotExist:
         logger.error(f'task object with task_id: {task_id} dose not exist')
         raise CeleryJobInfo.DoesNotExist
+    
+    validate = TaskValidator(task)
+    if not validate.is_valid:
+        logger.error(f'task object with task_id: {task_id} is not a valid task')
+        raise Exception
     
     from_email = settings.EMAIL
     subject = f"Task Reminder: {task.title}"
