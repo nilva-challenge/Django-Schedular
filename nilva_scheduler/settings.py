@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+from distutils.util import strtobool
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +28,20 @@ SECRET_KEY = (
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(os.getenv("DEBUG", "true"))
 
 ALLOWED_HOSTS = []
 
 
 # Application definition
+PROJECT_APPS = [
+    "members",
+    "scheduler",
+]
+
+THIRD_PARTY_APPS = [
+    "rest_framework",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -39,6 +50,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    *PROJECT_APPS,
+    *THIRD_PARTY_APPS,
 ]
 
 MIDDLEWARE = [
