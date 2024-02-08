@@ -84,6 +84,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "nilva_scheduler.wsgi.application"
 
+# AUTH USER MODEL
+AUTH_USER_MODEL = "members.Member"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
