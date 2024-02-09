@@ -1,25 +1,23 @@
 {
     "name": "Python: Nilva Scheduler",
-
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
             "PYTHON_VERSION": "3.9-bullseye"
         }
     },
-
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-python.python",
                 "ms-python.black-formatter",
                 "donjayamanne.githistory",
-                "streetsidesoftware.code-spell-checker"
+                "streetsidesoftware.code-spell-checker",
+                "ms-python.vscode-pylance"
             ]
         }
     },
-
-    "forwardPorts": [8000],
-    "postCreateCommand": "pip install -r requirements.txt"
+    "forwardPorts": [
+        8000
+    ]
 }
-  
