@@ -41,6 +41,7 @@ PROJECT_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "django_extensions",
 ]
 
 INSTALLED_APPS = [
@@ -123,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tehran"
 
 USE_I18N = True
 

@@ -11,3 +11,10 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TaskPermission(models.TextChoices):
+    ADD_TASK = "add_task", "Can add tasks"
+    VIEW_TASK = "view_task", "Can view tasks"
+    CHANGE_TASK = "change_task", "Can change tasks"
+    DELETE_TASK = "delete_task", "Can delete tasks"

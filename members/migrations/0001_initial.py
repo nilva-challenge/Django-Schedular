@@ -5,31 +5,6 @@ import django.contrib.auth.validators
 from django.db import migrations, models
 import django.utils.timezone
 
-from members.models import TaskPermission
-from django.contrib.auth.models import ContentType, Permission, User
-
-
-def create_task_permissions(apps, schema_editor):
-    content_type = ContentType.objects.get_for_model(User)
-
-    Permission.objects.get_or_create(
-        codename=TaskPermission.VIEW_TASK,
-        name="Can view tasks",
-        content_type=content_type,
-    )
-
-    Permission.objects.get_or_create(
-        codename=TaskPermission.CHANGE_TASK,
-        name="Can update tasks",
-        content_type=content_type,
-    )
-
-    Permission.objects.get_or_create(
-        codename=TaskPermission.DELETE_TASK,
-        name="Can delete tasks",
-        content_type=content_type,
-    )
-
 
 class Migration(migrations.Migration):
 
@@ -40,7 +15,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(create_task_permissions),
         migrations.CreateModel(
             name="Member",
             fields=[
