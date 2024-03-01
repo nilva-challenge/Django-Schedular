@@ -5,7 +5,7 @@ from rest_framework import generics, permissions
 from ..models import Task
 import app.custom_permissions as custom_perms
 from ..tasks import send_email
-from ..serializers import UserSerializer, TaskSerializer
+from ..serializers import UserSerializer, TaskAdminSerializer
 User = get_user_model()
 
 
@@ -65,7 +65,7 @@ class TaskAdminListCreateView(generics.ListCreateAPIView):
         perform_create(serializer): Performs the creation of a new task and schedules an email notification.
     """
 
-    serializer_class = TaskSerializer
+    serializer_class = TaskAdminSerializer
     permission_classes = [permissions.IsAuthenticated,
                           custom_perms.IsAdminUser]
 
@@ -116,7 +116,7 @@ class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         perform_update(serializer): Performs the update of a task and reschedules email notification if necessary.
     """
 
-    serializer_class = TaskSerializer
+    serializer_class = TaskAdminSerializer
     permission_classes = [permissions.IsAuthenticated,
                           custom_perms.IsAdminUser]
 
