@@ -31,6 +31,7 @@ class TaskListCreateView(generics.ListCreateAPIView):
 
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
+    filterset_fields = ('sent_at', 'time_to_send', 'title')
 
     def get_queryset(self):
         """
