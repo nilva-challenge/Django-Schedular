@@ -1,8 +1,10 @@
 from django.core.mail import send_mail
-from celery import shared_task
 from django.utils import timezone
+
+from celery import shared_task
+
 from .models import Task
-from celery import current_app
+
 
 @shared_task
 def send_email(title, description, owner_email, task_id):

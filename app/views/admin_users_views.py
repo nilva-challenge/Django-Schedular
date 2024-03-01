@@ -1,11 +1,13 @@
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+
 from rest_framework import generics, permissions
 
-from ..models import Task
 import app.custom_permissions as custom_perms
+from ..models import Task
 from ..tasks import send_email
 from ..serializers import UserSerializer, TaskAdminSerializer
+
 User = get_user_model()
 
 
