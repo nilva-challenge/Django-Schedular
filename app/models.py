@@ -17,6 +17,7 @@ class Task(models.Model):
     description = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     time_to_send = models.DateTimeField()
+    sent_at = models.DateTimeField(blank=True, null=True)
     pre_tasks = models.ManyToManyField('self', symmetrical=False, blank=True)
 
     def __str__(self):
